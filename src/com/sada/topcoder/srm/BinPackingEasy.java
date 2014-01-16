@@ -24,6 +24,7 @@
 package com.sada.topcoder.srm;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -36,7 +37,28 @@ public class BinPackingEasy {
   public static void main(String[] args) {
     int[] item = {130, 140, 150, 160};
     System.out.println(minBins(item));
+    System.out.println(minBins1(item));
   }
+  
+ public static int minBins1(int[] item)
+	{
+		List<Integer> list = new ArrayList<Integer>();
+    Arrays.sort(item);
+		for(int k=item.length-1; k >=0; k--){
+			int i=0;
+			for(; i< list.size(); i++){
+				if(list.get(i) + item[k] <=300){
+					list.set(i, list.get(i)+ item[k]);
+          break;
+				}
+			}
+			if(i== list.size()){
+				list.add(item[k]);
+			}
+		}
+		
+		return list.size();
+	}
 
   public static int minBins(int[] item) {
     ArrayList<Integer> list = new ArrayList<Integer>(item.length);
