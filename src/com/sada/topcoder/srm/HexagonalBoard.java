@@ -26,86 +26,86 @@ package com.sada.topcoder.srm;
 import java.util.HashSet;
 
 /**
- *
  * @author Sada Kurapati <sadakurapati@gmail.com>
  */
 public class HexagonalBoard {
 
-  public static void main(String[] args) {
-    String[] board = {"XX-XX--"
-                    ,"-XX-XXX"
-                    ,"X-XX--X"
-                    ,"X--X-X-"
-                    ,"XX-X-XX"
-                    ,"-X-XX-X"
-                    ,"-XX-XX-"};
-    HexagonalBoard o = new HexagonalBoard();
-    System.out.println(o.minColors(board));
-  }
-
-  public int minColors(String[] board) {
-    int maxColors = 0;
-    char[][] charBoard = buildCharArray(board);
-    for (int i = 0; i < board[0].length(); i++) {
-      for (int j = 0; j < board.length; j++) {
-        maxColors = colorThisCell(charBoard, i, j, maxColors);
-      }
+    public static void main(String[] args) {
+        String[] board = {"XX-XX--"
+                , "-XX-XXX"
+                , "X-XX--X"
+                , "X--X-X-"
+                , "XX-X-XX"
+                , "-X-XX-X"
+                , "-XX-XX-"};
+        HexagonalBoard o = new HexagonalBoard();
+        System.out.println(o.minColors(board));
     }
-    return maxColors;
-  }
 
-  public char[][] buildCharArray(String[] board) {
-    char[][] charBoard = new char[board[0].length()][board.length];
-    for (int i = 0; i < board[0].length(); i++) {
-      for (int j = 0; j < board.length; j++) {
-        charBoard[i][j] = board[i].charAt(j);
-      }
+    public int minColors(String[] board) {
+        int maxColors = 0;
+        char[][] charBoard = buildCharArray(board);
+        for (int i = 0; i < board[0].length(); i++) {
+            for (int j = 0; j < board.length; j++) {
+                maxColors = colorThisCell(charBoard, i, j, maxColors);
+            }
+        }
+        return maxColors;
     }
-    return charBoard;
-  }
 
-  public int colorThisCell(char[][] charBoard, int row, int col, int maxColors) {
-    if (charBoard[row][col] == 'X') {
-      //check to see if we use the existing colors.
-      int i = 1;
-      for (; i <= maxColors; i++) {
-        //can we use color i?
-        HashSet<Integer> usedColors = new HashSet<Integer>();
-        //left
-        if (col > 0 && charBoard[row][col] != '-' && isValidColor(charBoard[row][col-1])) {
-          usedColors.add(Integer.valueOf(charBoard[row][col-1] -'0'));
+    public char[][] buildCharArray(String[] board) {
+        char[][] charBoard = new char[board[0].length()][board.length];
+        for (int i = 0; i < board[0].length(); i++) {
+            for (int j = 0; j < board.length; j++) {
+                charBoard[i][j] = board[i].charAt(j);
+            }
         }
-        //right
-        if (col < charBoard[0].length - 1 && charBoard[row][col] != '-' && isValidColor(charBoard[row][col + 1])) {
-          usedColors.add(Integer.valueOf(charBoard[row][col + 1] -'0'));
-        }
-        //top
-        if (row > 0 && charBoard[row][col] != '-' && isValidColor(charBoard[row - 1][col])) {
-          usedColors.add(Integer.valueOf(charBoard[row - 1][col] -'0'));
-        }
-        //bottom
-        if (row < charBoard.length - 1 && charBoard[row][col] != '-' && isValidColor(charBoard[row+1][col])) {
-          usedColors.add(Integer.valueOf(charBoard[row+1][col] -'0'));
-        }
+        return charBoard;
+    }
 
-        if (!usedColors.contains(i)) {
-          //use color i and break
-          charBoard[row][col] = Character.forDigit(i, 10);
-          break;
+    public int colorThisCell(char[][] charBoard, int row, int col, int maxColors) {
+        if (charBoard[row][col] == 'X') {
+            //check to see if we use the existing colors.
+            int i = 1;
+            for (; i <= maxColors; i++) {
+                //can we use color i?
+                HashSet<Integer> usedColors = new HashSet<Integer>();
+                //left
+                if (col > 0 && charBoard[row][col] != '-' && isValidColor(charBoard[row][col - 1])) {
+                    usedColors.add(Integer.valueOf(charBoard[row][col - 1] - '0'));
+                }
+                //right
+                if (col < charBoard[0].length - 1 && charBoard[row][col] != '-' && isValidColor(charBoard[row][col + 1])) {
+                    usedColors.add(Integer.valueOf(charBoard[row][col + 1] - '0'));
+                }
+                //top
+                if (row > 0 && charBoard[row][col] != '-' && isValidColor(charBoard[row - 1][col])) {
+                    usedColors.add(Integer.valueOf(charBoard[row - 1][col] - '0'));
+                }
+                //bottom
+                if (row < charBoard.length - 1 && charBoard[row][col] != '-' && isValidColor(charBoard[row + 1][col])) {
+                    usedColors.add(Integer.valueOf(charBoard[row + 1][col] - '0'));
+                }
+
+                if (!usedColors.contains(i)) {
+                    //use color i and break
+                    charBoard[row][col] = Character.forDigit(i, 10);
+                    break;
+                }
+            }
+            if (i > maxColors) {
+                ++maxColors;
+                charBoard[row][col] = Character.forDigit(i, 10);
+            }
         }
-      }
-      if (i > maxColors) {
-        ++maxColors;
-        charBoard[row][col] = Character.forDigit(i, 10);
-      }
+        return maxColors;
     }
-    return maxColors;
-  }
-  public boolean isValidColor(char c){
-    if(c != '-' && c != 'X'){
-      return true;
-    }else{
-      return false;
+
+    public boolean isValidColor(char c) {
+        if (c != '-' && c != 'X') {
+            return true;
+        } else {
+            return false;
+        }
     }
-  }
 }

@@ -28,23 +28,23 @@ import java.util.Arrays;
 
 /**
  * SRM 599 - 250
+ *
  * @author Sada Kurapati <sadakurapati@gmail.com>
  */
 public class MiniatureDachshund {
-  public static void main(String[] args) {
-    int[] mikan = {100, 100, 100, 100, 100};
-    int weight = 4750;
-    System.out.println(maxMikan(mikan, weight));
-  }
-
-  
-  public static int maxMikan(int[] mikan, int weight)
-	{
-		Arrays.sort(mikan);
-    int i=0;
-    for(; i < mikan.length && weight + mikan[i] <= 5000; i++){
-      weight+=mikan[i];
+    public static void main(String[] args) {
+        int[] mikan = {100, 100, 100, 100, 100};
+        int weight = 4750;
+        System.out.println(maxMikan(mikan, weight));
     }
-    return i;
-	}
+
+
+    public static int maxMikan(int[] mikan, int weight) {
+        Arrays.sort(mikan);
+        int i = 0;
+        for (; i < mikan.length && weight + mikan[i] <= 5000; i++) {
+            weight += mikan[i];
+        }
+        return i;
+    }
 }

@@ -26,54 +26,55 @@ package com.sada.topcoder.srm;
 
 /**
  * [11/29/2013] SRM 598 - 500
+ *
  * @author Sada Kurapati <sadakurapati@gmail.com>
  */
 public class ErasingCharacters {
-  public static void main(String[] args) {
-    String s = "aabcddce";
-    System.out.println(simulate(s));
-    System.out.println(simulate1(s));
-  }
-  public static String simulate(String s)
-	{
-    StringBuilder sb = new StringBuilder(s);
-		while(sb.length() > 0){
-      //find the repeating character
-      int n = sb.length();
-      int at = -1;
-      for(int i=1; i < n; i++){
-        if(sb.charAt(i-1) == sb.charAt(i)){
-          at = i-1;
-          break;
+    public static void main(String[] args) {
+        String s = "aabcddce";
+        System.out.println(simulate(s));
+        System.out.println(simulate1(s));
+    }
+
+    public static String simulate(String s) {
+        StringBuilder sb = new StringBuilder(s);
+        while (sb.length() > 0) {
+            //find the repeating character
+            int n = sb.length();
+            int at = -1;
+            for (int i = 1; i < n; i++) {
+                if (sb.charAt(i - 1) == sb.charAt(i)) {
+                    at = i - 1;
+                    break;
+                }
+            }
+            if (at == -1) {
+                return sb.toString();
+            } else {
+                //remove both chars.
+                sb.deleteCharAt(at);
+                sb.deleteCharAt(at);
+            }
         }
-      }
-      if(at == -1){
         return sb.toString();
-      }else{
-        //remove both chars.
-        sb.deleteCharAt(at);
-        sb.deleteCharAt(at);
-      }
     }
-    return sb.toString();
-	}
- public static String simulate1(String s)
-	{
-    if(s.length() <= 1){
-      return s;
+
+    public static String simulate1(String s) {
+        if (s.length() <= 1) {
+            return s;
+        }
+        StringBuilder sb = new StringBuilder(s);
+        int i = 0;
+        while (i + 1 < sb.length()) {
+            if (sb.charAt(i) == sb.charAt(i + 1)) {
+                sb.deleteCharAt(i);
+                sb.deleteCharAt(i);
+                //reset i;
+                i = 0;
+            } else {
+                ++i;
+            }
+        }
+        return sb.toString();
     }
-    StringBuilder sb = new StringBuilder(s);
-    int i=0;
-    while(i+1 < sb.length()){
-      if(sb.charAt(i) == sb.charAt(i+1)){
-        sb.deleteCharAt(i);
-        sb.deleteCharAt(i);
-        //reset i;
-        i=0;
-      }else{
-        ++i;
-      }
-    }
-   return sb.toString();
-  } 
 }

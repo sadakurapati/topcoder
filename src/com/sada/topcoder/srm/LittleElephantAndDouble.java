@@ -33,45 +33,45 @@ import java.util.Arrays;
  */
 public class LittleElephantAndDouble {
 
-  public static void main(String[] args) {
-    int[] A = {1, 2, 3}; //NO
-    //int[] A = {148, 298, 1184}; //NO
-    //int[] A = {4, 8, 2, 1, 16};
-    //int[] A = {94, 752, 94, 376, 1504};
-    System.out.println(getAnswer(A)); //this is wrong one
-    System.out.println(getAnswer1(A));
-  }
+    public static void main(String[] args) {
+        int[] A = {1, 2, 3}; //NO
+        //int[] A = {148, 298, 1184}; //NO
+        //int[] A = {4, 8, 2, 1, 16};
+        //int[] A = {94, 752, 94, 376, 1504};
+        System.out.println(getAnswer(A)); //this is wrong one
+        System.out.println(getAnswer1(A));
+    }
 
-  public static String getAnswer(int[] A) {
-    Arrays.sort(A);
-    int len = A.length;
-    int max = A[len - 1];
-    for (int i = 0; i < len - 1; i++) {
-      int remainder = max % A[i];
-      if (remainder != 0 && remainder != 1) {
-        return "NO";
-      }
+    public static String getAnswer(int[] A) {
+        Arrays.sort(A);
+        int len = A.length;
+        int max = A[len - 1];
+        for (int i = 0; i < len - 1; i++) {
+            int remainder = max % A[i];
+            if (remainder != 0 && remainder != 1) {
+                return "NO";
+            }
+        }
+        return "YES";
     }
-    return "YES";
-  }
 
-  public static String getAnswer1(int[] A) {
-    int len = A.length;
-    if (len == 1) {
-      return "YES";
+    public static String getAnswer1(int[] A) {
+        int len = A.length;
+        if (len == 1) {
+            return "YES";
+        }
+        for (int i = 0; i < A.length; i++) {
+            while (A[i] % 2 == 0) {
+                A[i] = A[i] / 2;
+            }
+        }
+        System.out.println(Arrays.toString(A));
+        //now array should contain all same elements then return yes, else no
+        for (int i = 1; i < A.length; i++) {
+            if (A[i - 1] != A[i]) {
+                return "NO";
+            }
+        }
+        return "YES";
     }
-    for (int i = 0; i < A.length; i++) {
-      while (A[i] % 2 == 0) {
-        A[i] = A[i] / 2;
-      }
-    }
-    System.out.println(Arrays.toString(A));
-    //now array should contain all same elements then return yes, else no
-    for (int i = 1; i < A.length; i++) {
-      if (A[i - 1] != A[i]) {
-        return "NO";
-      }
-    }
-    return "YES";
-  }
 }

@@ -1,7 +1,7 @@
 /*
- * The MIT License
+ * The MIT License (MIT)
  *
- * Copyright 2014 Sada Kurapati <sadakurapati@gmail.com>.
+ * Copyright (c) 2014 Sada Kurapati <sadakurapati@gmail.com>
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,31 +21,39 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+
 package com.sada.topcoder.srm;
 
-/**
- * Single Round Match 603 Monday, January 6th, 2014 Value: 250
- *
- * @author Sada Kurapati <sadakurapati@gmail.com>
- */
-public class MiddleCode {
+public class PalindromicSubstringsDiv2 {
 
-    public String encode(String s) {
-        StringBuilder from = new StringBuilder(s);
-        StringBuilder to = new StringBuilder();
-        while (from.length() > 0) {
-            int mid = from.length() / 2;
-            //if length is even, compare and take the small char
-            if (from.length() % 2 == 0) {
-                char c1 = from.charAt(mid - 1);
-                char c2 = from.charAt(mid);
-                if (c1 < c2) {
-                    mid = mid - 1;
+    public int count(String[] S1, String[] S2) {
+        StringBuilder S = new StringBuilder();
+        for (String s : S1) {
+            S.append(s);
+        }
+
+        for (String s : S2) {
+            S.append(s);
+        }
+        int count = S.length();
+        int length = S.length();
+        for (int chars = 2; chars <= length; chars++) {
+            for (int start = 0; start + chars <= length; start++) {
+                String str = S.substring(start, start + chars);
+                if (isPalindrome(str)) {
+                    count++;
                 }
             }
-            to.append(from.charAt(mid));
-            from.deleteCharAt(mid);
         }
-        return to.toString();
+
+        return count;
+    }
+
+    public boolean isPalindrome(String str) {
+        if (str.length() < 1) {
+            return false;
+        }
+        String reverse = new StringBuilder(str).reverse().toString();
+        return str.equals(reverse);
     }
 }

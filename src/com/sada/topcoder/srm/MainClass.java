@@ -25,13 +25,12 @@
 package com.sada.topcoder.srm;
 
 /**
- *
  * @author Sada Kurapati <sadakurapati@gmail.com>
  */
 public class MainClass {
-  public static void main(String[] args) {
-    StringBuilder sb = new StringBuilder("WWW");
-    sb.replace(1, 1, "B");
-    System.out.println(sb);
-  }
+    public static void main(String[] args) {
+        StringBuilder sb = new StringBuilder("WWW");
+        sb.replace(1, 1, "B");
+        System.out.println(sb);
+    }
 }

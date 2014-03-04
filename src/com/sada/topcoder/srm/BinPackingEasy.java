@@ -30,67 +30,67 @@ import java.util.List;
 
 /**
  * [11/29/2013] SRM 598 - 250
+ *
  * @author Sada Kurapati <sadakurapati@gmail.com>
  */
 public class BinPackingEasy {
 
-  public static void main(String[] args) {
-    int[] item = {130, 140, 150, 160};
-    System.out.println(minBins(item));
-    System.out.println(minBins1(item));
-  }
-  
- public static int minBins1(int[] item)
-	{
-		List<Integer> list = new ArrayList<Integer>();
-    Arrays.sort(item);
-		for(int k=item.length-1; k >=0; k--){
-			int i=0;
-			for(; i< list.size(); i++){
-				if(list.get(i) + item[k] <=300){
-					list.set(i, list.get(i)+ item[k]);
-          break;
-				}
-			}
-			if(i== list.size()){
-				list.add(item[k]);
-			}
-		}
-		
-		return list.size();
-	}
+    public static void main(String[] args) {
+        int[] item = {130, 140, 150, 160};
+        System.out.println(minBins(item));
+        System.out.println(minBins1(item));
+    }
 
-  public static int minBins(int[] item) {
-    ArrayList<Integer> list = new ArrayList<Integer>(item.length);
-    for (int it : item) {
-      list.add(it);
+    public static int minBins1(int[] item) {
+        List<Integer> list = new ArrayList<Integer>();
+        Arrays.sort(item);
+        for (int k = item.length - 1; k >= 0; k--) {
+            int i = 0;
+            for (; i < list.size(); i++) {
+                if (list.get(i) + item[k] <= 300) {
+                    list.set(i, list.get(i) + item[k]);
+                    break;
+                }
+            }
+            if (i == list.size()) {
+                list.add(item[k]);
+            }
+        }
+
+        return list.size();
     }
-    Collections.sort(list, Collections.reverseOrder());
-    int binMax = 300;
-    int binCount = 0;
-    while (list.size() > 0 && fillBin(list, binMax)) {
-      binCount++;
+
+    public static int minBins(int[] item) {
+        ArrayList<Integer> list = new ArrayList<Integer>(item.length);
+        for (int it : item) {
+            list.add(it);
+        }
+        Collections.sort(list, Collections.reverseOrder());
+        int binMax = 300;
+        int binCount = 0;
+        while (list.size() > 0 && fillBin(list, binMax)) {
+            binCount++;
+        }
+        return binCount;
     }
-    return binCount;
-  }
-  
-  public static boolean fillBin(List<Integer> items, int binSize){
-    int itemCount = 0;
-    int i = 0;
-    while(i < items.size() && itemCount < 2 && binSize > 0){
-      if(items.get(i) <= binSize){
-        //consume this bin
-        binSize -= items.get(i);
-        items.remove(i);
-        ++itemCount;
-      }else{
-        ++i;
-      }
+
+    public static boolean fillBin(List<Integer> items, int binSize) {
+        int itemCount = 0;
+        int i = 0;
+        while (i < items.size() && itemCount < 2 && binSize > 0) {
+            if (items.get(i) <= binSize) {
+                //consume this bin
+                binSize -= items.get(i);
+                items.remove(i);
+                ++itemCount;
+            } else {
+                ++i;
+            }
+        }
+        if (itemCount > 0) {
+            return true;
+        } else {
+            return false;
+        }
     }
-    if(itemCount > 0){
-      return true;
-    }else{
-      return false;
-    }
-  }
 }

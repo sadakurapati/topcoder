@@ -30,26 +30,27 @@ package com.sada.topcoder.srm;
  */
 public class TypoCoderDiv2 {
 
-  public int count(int[] rating) {
-    int cnt = 0;
-    int currentRating = 500;
-    for (int i = 0; i < rating.length; i++) {
-      if (isColorChanged(currentRating, rating[i])) {
-        cnt++;
-      }
-      currentRating = rating[i];
-    }
-    return cnt;
-  }
-  //check if the color is changes based on current and next score.
-  private boolean isColorChanged(int currentScore, int nextScore) {
-    if (currentScore < 1200 && nextScore >= 1200) {
-      return true;
-    }
-    if (currentScore >= 1200 && nextScore < 1200) {
-      return true;
+    public int count(int[] rating) {
+        int cnt = 0;
+        int currentRating = 500;
+        for (int i = 0; i < rating.length; i++) {
+            if (isColorChanged(currentRating, rating[i])) {
+                cnt++;
+            }
+            currentRating = rating[i];
+        }
+        return cnt;
     }
 
-    return false;
-  }
+    //check if the color is changes based on current and next score.
+    private boolean isColorChanged(int currentScore, int nextScore) {
+        if (currentScore < 1200 && nextScore >= 1200) {
+            return true;
+        }
+        if (currentScore >= 1200 && nextScore < 1200) {
+            return true;
+        }
+
+        return false;
+    }
 }

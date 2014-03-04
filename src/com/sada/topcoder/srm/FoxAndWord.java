@@ -1,7 +1,7 @@
 /*
- * The MIT License
+ * The MIT License (MIT)
  *
- * Copyright 2014 Sada Kurapati <sadakurapati@gmail.com>.
+ * Copyright (c) 2014 Sada Kurapati <sadakurapati@gmail.com>
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,31 +21,29 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+
 package com.sada.topcoder.srm;
 
-/**
- * Single Round Match 603 Monday, January 6th, 2014 Value: 250
- *
- * @author Sada Kurapati <sadakurapati@gmail.com>
- */
-public class MiddleCode {
+public class FoxAndWord {
 
-    public String encode(String s) {
-        StringBuilder from = new StringBuilder(s);
-        StringBuilder to = new StringBuilder();
-        while (from.length() > 0) {
-            int mid = from.length() / 2;
-            //if length is even, compare and take the small char
-            if (from.length() % 2 == 0) {
-                char c1 = from.charAt(mid - 1);
-                char c2 = from.charAt(mid);
-                if (c1 < c2) {
-                    mid = mid - 1;
+    public int howManyPairs(String[] words) {
+        int count = 0;
+        for (int i = 0; i < words.length; i++) {
+            for (int j = i + 1; j < words.length; j++) {
+                if (isPair(words[i], words[j])) {
+                    count++;
                 }
             }
-            to.append(from.charAt(mid));
-            from.deleteCharAt(mid);
         }
-        return to.toString();
+        return count;
+    }
+
+    public boolean isPair(String one, String two) {
+        two = two + two;
+        if (two.contains(one)) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

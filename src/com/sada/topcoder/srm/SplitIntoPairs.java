@@ -32,37 +32,38 @@ import java.util.Arrays;
  */
 public class SplitIntoPairs {
 
-  public int makepairs(int[] A, int X) {
-    Arrays.sort(A);
-    boolean[] state = new boolean[100];
-    int answer = 0;
-    for (int i = 0; i < A.length; i++) {
-      if (!state[i]) {
-        int pick = A[i];
-        state[i] = true;
-        int pair = getBestPair(A, X, pick, state);
-        if (pair < 0) {
-          state[i] = false; //put this back in pool
-          continue;
+    public int makepairs(int[] A, int X) {
+        Arrays.sort(A);
+        boolean[] state = new boolean[100];
+        int answer = 0;
+        for (int i = 0; i < A.length; i++) {
+            if (!state[i]) {
+                int pick = A[i];
+                state[i] = true;
+                int pair = getBestPair(A, X, pick, state);
+                if (pair < 0) {
+                    state[i] = false; //put this back in pool
+                    continue;
+                }
+                state[pair] = true;
+                answer++;
+            }
         }
-        state[pair] = true;
-        answer++;
-      }
-    }
-    return answer;
-  }
-  //pick smaller available pair
-  public int getBestPair(int[] A, int X, int pick, boolean[] state) {
-    int ans = -1;
-    for (int i = 0; i < A.length; i++) {
-      if (!state[i]) {
-        long value = (long) pick * A[i];
-        if (value >= X) {
-          return i;
-        }
-      }
+        return answer;
     }
 
-    return ans;
-  }
+    //pick smaller available pair
+    public int getBestPair(int[] A, int X, int pick, boolean[] state) {
+        int ans = -1;
+        for (int i = 0; i < A.length; i++) {
+            if (!state[i]) {
+                long value = (long) pick * A[i];
+                if (value >= X) {
+                    return i;
+                }
+            }
+        }
+
+        return ans;
+    }
 }

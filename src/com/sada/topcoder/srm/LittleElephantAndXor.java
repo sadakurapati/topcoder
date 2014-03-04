@@ -27,27 +27,28 @@ package com.sada.topcoder.srm;
 
 /**
  * NOT COMPLETE
+ *
  * @author Sada Kurapati <sadakurapati@gmail.com>
  */
 public class LittleElephantAndXor {
-  
-  public static void main(String[] args) {
-    int a = 1000000000;
-    int b = 1000000000;
-    int c = 500000000;
-    System.out.println(getNumber(a, b, c));
-  }
-  
-  public static long getNumber(int A, int B, int C){
-    
-    long cnt = 0l;
-    for(int i=0; i<=A; i++){
-      for(int j=0; j<=B; j++){
-        if( (i^j) > C){
-          ++cnt;
-        }
-      }
+
+    public static void main(String[] args) {
+        int a = 1000000000;
+        int b = 1000000000;
+        int c = 500000000;
+        System.out.println(getNumber(a, b, c));
     }
-    return cnt;
-  }
+
+    public static long getNumber(int A, int B, int C) {
+
+        long cnt = 0l;
+        for (int i = 0; i <= A; i++) {
+            for (int j = 0; j <= B; j++) {
+                if ((i ^ j) > C) {
+                    ++cnt;
+                }
+            }
+        }
+        return cnt;
+    }
 }

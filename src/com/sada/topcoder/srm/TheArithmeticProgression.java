@@ -24,15 +24,15 @@
 package com.sada.topcoder.srm;
 
 /**
- *
  * @author Sada Kurapati <sadakurapati@gmail.com>
  */
 public class TheArithmeticProgression {
-  public static void main(String[] args) {
-    System.out.println(minimumChange(4, 4, 8));
-  }
-  public static double minimumChange(int a, int b, int c){
-    double result = a+c-2*b;
-    return Math.abs(result/2);
-  }
+    public static void main(String[] args) {
+        System.out.println(minimumChange(4, 4, 8));
+    }
+
+    public static double minimumChange(int a, int b, int c) {
+        double result = a + c - 2 * b;
+        return Math.abs(result / 2);
+    }
 }

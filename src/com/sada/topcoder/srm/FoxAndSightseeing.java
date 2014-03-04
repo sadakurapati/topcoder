@@ -30,44 +30,44 @@ package com.sada.topcoder.srm;
  */
 public class FoxAndSightseeing {
 
-  public static void main(String[] args) {
-    //int[] L = {1, 4, -1, 3}; //4
-    //int[] L = {-2, 4, 3}; //5
-    //int[] L = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10}; //9
-    //int[] L = {74,84,92,23,5,-70,-47,-59,24,-86,-39,99,85,-42,54,100,47,-3,42,38}; //836
-    int[] L = {2, -3, 5, 7, -11, -13, 17, -19, 23, 29, -31, -37, -41, 43, -47, -53, -59, 61, -67, 71}; //535
+    public static void main(String[] args) {
+        //int[] L = {1, 4, -1, 3}; //4
+        //int[] L = {-2, 4, 3}; //5
+        //int[] L = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10}; //9
+        //int[] L = {74,84,92,23,5,-70,-47,-59,24,-86,-39,99,85,-42,54,100,47,-3,42,38}; //836
+        int[] L = {2, -3, 5, 7, -11, -13, 17, -19, 23, 29, -31, -37, -41, 43, -47, -53, -59, 61, -67, 71}; //535
 
-    System.out.println(getMin(L));
-  }
+        System.out.println(getMin(L));
+    }
 
-  public static int getMin(int[] position) {
-    int length = position.length;
-    //Base case.
-    if (length == 3) {
-      return Math.abs(position[0] - position[2]);
+    public static int getMin(int[] position) {
+        int length = position.length;
+        //Base case.
+        if (length == 3) {
+            return Math.abs(position[0] - position[2]);
+        }
+        //finding max distance
+        int currentMaxAt = -1;
+        int currentMax = Integer.MIN_VALUE;
+        int sum = 0;
+        sum += Math.abs(position[0] - position[1]);
+        for (int i = 1; i < length - 1; i++) {
+            int d1 = Math.abs(position[i - 1] - position[i]); //city 1 to 2
+            int d2 = Math.abs(position[i] - position[i + 1]); //city 2 to 3
+            int d3 = Math.abs(position[i - 1] - position[i + 1]);//city 1 to 3 skipping 2
+            int skipDistance = d1 + d2 - d3;
+            if (skipDistance > currentMax) {
+                currentMax = skipDistance;
+                currentMaxAt = i;
+            }
+            sum += Math.abs(position[i] - position[i + 1]);
+        }
+        //remove skipping city distances.
+        int d1 = Math.abs(position[currentMaxAt - 1] - position[currentMaxAt]);
+        int d2 = Math.abs(position[currentMaxAt] - position[currentMaxAt + 1]);
+        int d3 = Math.abs(position[currentMaxAt - 1] - position[currentMaxAt + 1]);
+        sum += d3 - d1 - d2;
+        return sum;
     }
-    //finding max distance
-    int currentMaxAt = -1;
-    int currentMax = Integer.MIN_VALUE;
-    int sum = 0;
-    sum += Math.abs(position[0] - position[1]);
-    for (int i = 1; i < length - 1; i++) {
-      int d1 = Math.abs(position[i - 1] - position[i]); //city 1 to 2
-      int d2 = Math.abs(position[i] - position[i + 1]); //city 2 to 3
-      int d3 = Math.abs(position[i - 1] - position[i + 1]);//city 1 to 3 skipping 2
-      int skipDistance = d1 + d2 - d3;
-      if (skipDistance > currentMax) {
-        currentMax = skipDistance;
-        currentMaxAt = i;
-      }
-      sum += Math.abs(position[i] - position[i + 1]);
-    }
-    //remove skipping city distances.
-    int d1 = Math.abs(position[currentMaxAt - 1] - position[currentMaxAt]);
-    int d2 = Math.abs(position[currentMaxAt] - position[currentMaxAt + 1]);
-    int d3 = Math.abs(position[currentMaxAt - 1] - position[currentMaxAt + 1]);
-    sum += d3 - d1 - d2;
-    return sum;
-  }
 
 }

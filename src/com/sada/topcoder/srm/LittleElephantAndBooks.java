@@ -26,30 +26,29 @@ package com.sada.topcoder.srm;
 import java.util.Arrays;
 
 /**
- *
  * @author Sada Kurapati <sadakurapati@gmail.com>
  */
 public class LittleElephantAndBooks {
 
-  public static void main(String[] args) {
-    int[] pages = {74, 86, 32, 13, 100, 67, 77};
-    int number = 2;
-    System.out.println(getNumber(pages, number));
-  }
-
-  public static int getNumber(int[] pages, int number) {
-    //sorting to pick the lowest sum of pages to read
-    Arrays.sort(pages);
-    int sum = 0;
-    //Add first number-1 books.
-    for (int i = 0; i < number - 1; i++) {
-      sum += pages[i];
+    public static void main(String[] args) {
+        int[] pages = {74, 86, 32, 13, 100, 67, 77};
+        int number = 2;
+        System.out.println(getNumber(pages, number));
     }
-    /**
-     * skip the number+1(index will be number) book as elephant Liviv need to
-     * read little more than lowest. *
-     */
-    sum += pages[number];
-    return sum;
-  }
+
+    public static int getNumber(int[] pages, int number) {
+        //sorting to pick the lowest sum of pages to read
+        Arrays.sort(pages);
+        int sum = 0;
+        //Add first number-1 books.
+        for (int i = 0; i < number - 1; i++) {
+            sum += pages[i];
+        }
+        /**
+         * skip the number+1(index will be number) book as elephant Liviv need to
+         * read little more than lowest. *
+         */
+        sum += pages[number];
+        return sum;
+    }
 }

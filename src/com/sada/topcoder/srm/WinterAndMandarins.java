@@ -1,7 +1,7 @@
 /*
- * The MIT License
+ * The MIT License (MIT)
  *
- * Copyright 2014 Sada Kurapati <sadakurapati@gmail.com>.
+ * Copyright (c) 2014 Sada Kurapati <sadakurapati@gmail.com>
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,31 +21,22 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+
 package com.sada.topcoder.srm;
 
-/**
- * Single Round Match 603 Monday, January 6th, 2014 Value: 250
- *
- * @author Sada Kurapati <sadakurapati@gmail.com>
- */
-public class MiddleCode {
+import java.util.Arrays;
 
-    public String encode(String s) {
-        StringBuilder from = new StringBuilder(s);
-        StringBuilder to = new StringBuilder();
-        while (from.length() > 0) {
-            int mid = from.length() / 2;
-            //if length is even, compare and take the small char
-            if (from.length() % 2 == 0) {
-                char c1 = from.charAt(mid - 1);
-                char c2 = from.charAt(mid);
-                if (c1 < c2) {
-                    mid = mid - 1;
-                }
+public class WinterAndMandarins {
+    public int getNumber(int[] bags, int K) {
+
+        Arrays.sort(bags);
+        int diff = Integer.MAX_VALUE;
+        for (int i = 0; i + K - 1 < bags.length; i++) {
+            int localDiff = Math.abs(bags[i] - bags[i + K - 1]);
+            if (localDiff < diff) {
+                diff = localDiff;
             }
-            to.append(from.charAt(mid));
-            from.deleteCharAt(mid);
         }
-        return to.toString();
+        return diff;
     }
 }

@@ -24,50 +24,49 @@
 package com.sada.topcoder.srm;
 
 /**
- *
  * @author Sada Kurapati <sadakurapati@gmail.com>
  */
 public class RaiseThisBarn {
 
-  public static void main(String[] args) {
-    String[] input = {"cc..c.c", "c....c....c", "............", ".c.c...c..ccc.c..c.c.cc..ccc"};
-    for (String str : input) {
-      System.out.println("Partitions:" + calc(str));
+    public static void main(String[] args) {
+        String[] input = {"cc..c.c", "c....c....c", "............", ".c.c...c..ccc.c..c.c.cc..ccc"};
+        for (String str : input) {
+            System.out.println("Partitions:" + calc(str));
+        }
     }
-  }
 
-  public static int calc(String str) {
+    public static int calc(String str) {
 
-    char[] c = str.toCharArray();
-    int n = c.length;
-    int cows = 0;
-    //count cows
-    for (int i = 0; i < n; i++) {
-      if (c[i] == 'c') {
-        ++cows;
-      }
+        char[] c = str.toCharArray();
+        int n = c.length;
+        int cows = 0;
+        //count cows
+        for (int i = 0; i < n; i++) {
+            if (c[i] == 'c') {
+                ++cows;
+            }
+        }
+        //if cows are odd, then we cant divide.
+        if (cows % 2 != 0) {
+            return 0;
+        }
+        //if no cows, then we can partition in n-1 ways.
+        if (cows == 0) {
+            return n - 1;
+        }
+        //move to half cows
+        int halfCows = cows / 2;
+        int counter = 0;
+        int i = 0;
+        for (; counter < halfCows; i++) {
+            if (c[i] == 'c') {
+                ++counter;
+            }
+        }
+        int partitions = 1;
+        while (c[i++] == '.') {
+            ++partitions;
+        }
+        return partitions;
     }
-    //if cows are odd, then we cant divide.
-    if (cows % 2 != 0) {
-      return 0;
-    }
-    //if no cows, then we can partition in n-1 ways.
-    if (cows == 0) {
-      return n - 1;
-    }
-    //move to half cows
-    int halfCows = cows / 2;
-    int counter = 0;
-    int i = 0;
-    for (; counter < halfCows; i++) {
-      if (c[i] == 'c') {
-        ++counter;
-      }
-    }
-    int partitions = 1;
-    while (c[i++] == '.') {
-      ++partitions;
-    }
-    return partitions;
-  }
 }

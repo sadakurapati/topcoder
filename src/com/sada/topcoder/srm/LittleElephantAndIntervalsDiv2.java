@@ -24,7 +24,6 @@
 package com.sada.topcoder.srm;
 
 import java.util.Arrays;
-import java.util.HashSet;
 
 /**
  * SRM 595 - 500
@@ -33,50 +32,50 @@ import java.util.HashSet;
  */
 public class LittleElephantAndIntervalsDiv2 {
 
-  public static void main(String[] args) {
-    int M = 3;
-    int[] L = {1, 1, 2};
-    int[] R = {3, 1, 2};
-    System.out.println(getNumber(M, L, R));
-  }
+    public static void main(String[] args) {
+        int M = 3;
+        int[] L = {1, 1, 2};
+        int[] R = {3, 1, 2};
+        System.out.println(getNumber(M, L, R));
+    }
 
-  public static int getNumber(int M, int[] L, int[] R) {
-    int[] colorChanges = new int[M];
-    // false - white, true - black
-    boolean[] currentState = new boolean[M];
-    Arrays.fill(colorChanges, 0);
-    int k = 0;
-    int length = L.length;
-    for (int i = 0; i < length; i++) {
-      //what color to choost?
-      int whiteBallsCount = getWhiteColoredBallsCount(currentState, L[i]-1, R[i]-1);
-      //choose least used color to get maximum
-      boolean option = false;
-      int blackBallsCount = R[i] - L[i] +1 - whiteBallsCount;
-      if(blackBallsCount < whiteBallsCount){
-        option = true;
-      }
-      for (k = L[i]-1; k < R[i]; k++) {
-        if(currentState[i] != option){
-          ++colorChanges[i];
-          currentState[i] = option;
+    public static int getNumber(int M, int[] L, int[] R) {
+        int[] colorChanges = new int[M];
+        // false - white, true - black
+        boolean[] currentState = new boolean[M];
+        Arrays.fill(colorChanges, 0);
+        int k = 0;
+        int length = L.length;
+        for (int i = 0; i < length; i++) {
+            //what color to choost?
+            int whiteBallsCount = getWhiteColoredBallsCount(currentState, L[i] - 1, R[i] - 1);
+            //choose least used color to get maximum
+            boolean option = false;
+            int blackBallsCount = R[i] - L[i] + 1 - whiteBallsCount;
+            if (blackBallsCount < whiteBallsCount) {
+                option = true;
+            }
+            for (k = L[i] - 1; k < R[i]; k++) {
+                if (currentState[i] != option) {
+                    ++colorChanges[i];
+                    currentState[i] = option;
+                }
+            }
         }
-      }
+        int answer = 0;
+        for (int i = 0; i < M; i++) {
+            answer += colorChanges[i];
+        }
+        return answer;
     }
-    int answer = 0;
-    for(int i = 0; i< M; i++){
-      answer+=colorChanges[i];
-    }
-    return answer;
-  }
 
-  public static int getWhiteColoredBallsCount(boolean[] currentState, int start, int end) {
-    int whiteBalls = 0;
-    for (int i = start; i <= end; i++) {
-      if (!currentState[i]) {
-        ++whiteBalls;
-      }
+    public static int getWhiteColoredBallsCount(boolean[] currentState, int start, int end) {
+        int whiteBalls = 0;
+        for (int i = start; i <= end; i++) {
+            if (!currentState[i]) {
+                ++whiteBalls;
+            }
+        }
+        return whiteBalls;
     }
-    return whiteBalls;
-  }
 }

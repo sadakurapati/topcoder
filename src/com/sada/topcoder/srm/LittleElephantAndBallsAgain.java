@@ -26,33 +26,33 @@ package com.sada.topcoder.srm;
 
 /**
  * SRM 595 - 250
+ *
  * @author Sada Kurapati <sadakurapati@gmail.com>
  */
 public class LittleElephantAndBallsAgain {
-  
-  public static void main(String[] args) {
-    String[] input = {null,"","RRGGBB","R","RGBRGB","RGGGBB","RGBRBRGRGRBBBGRBRBRGBGBBBGRGBBBBRGBGRRGGRRRGRBBBBR"};
-    for(String str: input){
-      System.out.println(getNumber(str));
+
+    public static void main(String[] args) {
+        String[] input = {null, "", "RRGGBB", "R", "RGBRGB", "RGGGBB", "RGBRBRGRGRBBBGRBRBRGBGBBBGRGBBBBRGBGRRGGRRRGRBBBBR"};
+        for (String str : input) {
+            System.out.println(getNumber(str));
+        }
     }
-  }
-  
- public static int getNumber(String S)
-	{
-    if(null == S) return 0;
-    char[] c = S.toCharArray();
-    int length = c.length;
-    //base case
-    if(length <= 1){
-      return 0;
+
+    public static int getNumber(String S) {
+        if (null == S) return 0;
+        char[] c = S.toCharArray();
+        int length = c.length;
+        //base case
+        if (length <= 1) {
+            return 0;
+        }
+        int fc = 0;
+        int lc = 1;
+        for (int i = 1; i < length; i++) {
+            //is previous element is same?
+            lc = (c[i - 1] == c[i]) ? lc + 1 : 1;
+            fc = (lc > fc) ? lc : fc;
+        }
+        return length - fc;
     }
-    int fc = 0;
-    int lc = 1;
-    for(int i=1; i < length; i++){
-      //is previous element is same?
-      lc = (c[i-1] == c[i])? lc+1:1;
-      fc = (lc > fc)?lc:fc;
-    }
-    return length - fc;
-	}
 }

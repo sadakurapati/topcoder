@@ -23,41 +23,43 @@ package com.sada.topcoder.srm;
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+
 /**
  * SRM 599 - 500
  * INCOMPLETE
+ *
  * @author Sada Kurapati <sadakurapati@gmail.com>
  */
 public class BigFatInteger2 {
 
-  public static void main(String[] args) {
-    int A = 8;
-    int B = 100;
-    int C = 4;
-    int D = 200;
-    System.out.println(isDivisible(A, B, C, D));
-  }
+    public static void main(String[] args) {
+        int A = 8;
+        int B = 100;
+        int C = 4;
+        int D = 200;
+        System.out.println(isDivisible(A, B, C, D));
+    }
 
-  public static String isDivisible(int A, int B, int C, int D) {
-    
-    int gc1 = gcd (A, C);
-    if(gc1 == 1){
-      return "not divisible";
-    }
-    int gc = gcd(B, D);
-    long sum1 = (long) Math.pow(A, gc);
-    long sum2 = (long) Math.pow(C, gc);
-    if (sum1 % sum2 == 0) {
-      return "divisible";
-    } else {
-      return "not divisible";
-    }
-  }
+    public static String isDivisible(int A, int B, int C, int D) {
 
-  public static int gcd(int a, int b) {
-    if (b == 0) {
-      return a;
+        int gc1 = gcd(A, C);
+        if (gc1 == 1) {
+            return "not divisible";
+        }
+        int gc = gcd(B, D);
+        long sum1 = (long) Math.pow(A, gc);
+        long sum2 = (long) Math.pow(C, gc);
+        if (sum1 % sum2 == 0) {
+            return "divisible";
+        } else {
+            return "not divisible";
+        }
     }
-    return gcd(b, a % b);
-  }
+
+    public static int gcd(int a, int b) {
+        if (b == 0) {
+            return a;
+        }
+        return gcd(b, a % b);
+    }
 }
